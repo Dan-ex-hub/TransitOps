@@ -39,10 +39,18 @@ const COLUMNS: ColumnDef<Driver>[] = [
 ];
 
 function Drivers() {
+  const { isManager } = useAuth();
+  if (!isManager) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center text-muted-foreground text-sm">
+        Access Denied. You do not have permission to view this page.
+      </div>
+    );
+  }
+
   const { data = [], isLoading } = useDrivers();
   const upsert = useUpsert<Driver>("drivers");
   const del = useDelete("drivers");
-  const { isManager } = useAuth();
   const qc = useQueryClient();
 
   const [search, setSearch] = useState("");

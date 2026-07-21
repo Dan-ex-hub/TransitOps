@@ -20,7 +20,11 @@ type AuthCtx = {
   profileLoaded: boolean;
   roles: AppRole[];
   status: AccountStatus | null;
-  isManager: boolean;   // admin or fleet_manager
+  isManager: boolean;        // admin or fleet_manager (write access)
+  isAdmin: boolean;
+  isFleetManager: boolean;
+  isFinancialAnalyst: boolean;
+  isDriver: boolean;
   isPending: boolean;
   isRejected: boolean;
   displayName: string | null;
@@ -31,7 +35,9 @@ type AuthCtx = {
 const Ctx = createContext<AuthCtx>({
   user: null, loading: true, profileLoaded: false,
   roles: [], status: null,
-  isManager: false, isPending: false, isRejected: false,
+  isManager: false, isAdmin: false, isFleetManager: false,
+  isFinancialAnalyst: false, isDriver: false,
+  isPending: false, isRejected: false,
   displayName: null,
   refreshProfile: () => {}, signOut: async () => {},
 });
@@ -95,13 +101,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => unsub();
   }, [user?.uid]);
 
+  const isAdmin          = roles.includes("admin");
+  const isFleetManager   = roles.includes("fleet_manager") || roles.includes("manager");
+  const isFinancialAnalyst = roles.includes("financial_analyst");
+  const isDriver         = roles.includes("driver");
+
   const value: AuthCtx = {
     user,
     loading,
     profileLoaded,
     roles,
     status,
-    isManager: roles.includes("admin") || roles.includes("manager") || roles.includes("fleet_manager"),
+    isManager: isAdmin || isFleetManager,
+    isAdmin,
+    isFleetManager,
+    isFinancialAnalyst,
+    isDriver,
     isPending: status === "pending",
     isRejected: status === "rejected",
     displayName,

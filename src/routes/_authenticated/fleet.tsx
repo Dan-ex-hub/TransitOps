@@ -45,10 +45,18 @@ const COLUMNS: ColumnDef<Vehicle>[] = [
 ];
 
 function Fleet() {
+  const { isManager, isDriver } = useAuth();
+  if (isDriver) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center text-muted-foreground text-sm">
+        Access Denied. Drivers do not have access to the Fleet register.
+      </div>
+    );
+  }
+
   const { data = [], isLoading } = useVehicles();
   const upsert = useUpsert<Vehicle>("vehicles");
   const del = useDelete("vehicles");
-  const { isManager } = useAuth();
   const qc = useQueryClient();
 
   const [search, setSearch] = useState("");

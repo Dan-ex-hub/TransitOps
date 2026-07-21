@@ -10,30 +10,29 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const NAV = [
-  { to: "/", label: "Overview", icon: LayoutDashboard, exact: true },
-  { to: "/fleet", label: "Fleet", icon: Truck },
-  { to: "/drivers", label: "Drivers", icon: Users },
-  { to: "/trips", label: "Dispatch", icon: RouteIcon },
-  { to: "/fuel", label: "Fuel", icon: Fuel },
-  { to: "/maintenance", label: "Maintenance", icon: Wrench },
-  { to: "/analytics", label: "Analytics", icon: BarChart3 },
-  { to: "/audit", label: "Audit log", icon: ScrollText },
-];
+const ALL_NAV = [
+  { to: "/",            label: "Overview",    icon: LayoutDashboard, exact: true,  roles: ["admin","fleet_manager","financial_analyst","driver"] },
+  { to: "/fleet",       label: "Fleet",       icon: Truck,           exact: false, roles: ["admin","fleet_manager","financial_analyst"] },
+  { to: "/drivers",     label: "Drivers",     icon: Users,           exact: false, roles: ["admin","fleet_manager"] },
+  { to: "/trips",       label: "Dispatch",    icon: RouteIcon,       exact: false, roles: ["admin","fleet_manager","financial_analyst","driver"] },
+  { to: "/fuel",        label: "Fuel",        icon: Fuel,            exact: false, roles: ["admin","fleet_manager","financial_analyst","driver"] },
+  { to: "/maintenance", label: "Maintenance", icon: Wrench,          exact: false, roles: ["admin","fleet_manager","financial_analyst","driver"] },
+  { to: "/analytics",   label: "Analytics",   icon: BarChart3,       exact: false, roles: ["admin","fleet_manager","financial_analyst"] },
+  { to: "/audit",       label: "Audit log",   icon: ScrollText,      exact: false, roles: ["admin"] },
+  { to: "/users",       label: "Users",       icon: UserCog,         exact: false, roles: ["admin"] },
+] as const;
 
 export function AppShell({ children }: { children?: ReactNode }) {
   const { pathname } = useLocation();
   const { theme, toggle } = useTheme();
   const { displayName, user, roles, signOut } = useAuth();
   const navigate = useNavigate();
-  const isAdmin = roles.includes("admin");
 
-  // Build nav — show Users only for admins
-  const NAV_ITEMS = [
-    ...NAV,
-    ...(isAdmin ? [{ to: "/users", label: "Users", icon: UserCog, exact: false }] : []),
-  ];
-  const activeLabel = NAV.find(n => n.exact ? pathname === n.to : pathname.startsWith(n.to) && n.to !== "/")?.label ?? "Overview";
+  // Filter nav items to only those the user's roles allow
+  const NAV_ITEMS = ALL_NAV.filter(n =>
+    roles.some(r => (n.roles as readonly string[]).includes(r))
+  );
+  const activeLabel = ALL_NAV.find(n => n.exact ? pathname === n.to : pathname.startsWith(n.to) && n.to !== "/")?.label ?? "Overview";
   const primaryRole = roles[0] ?? "viewer";
   const name = displayName ?? user?.email?.split("@")[0] ?? "Guest";
   const initials = name.split(/\s+/).slice(0, 2).map(s => s[0]?.toUpperCase()).join("") || "U";

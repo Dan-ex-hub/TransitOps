@@ -6,6 +6,7 @@ import { rtdb } from "@/integrations/firebase/client";
 import { SectionHeader, Panel } from "@/components/ui-bits";
 import { DataToolbar } from "@/components/data-toolbar";
 import type { ColumnDef } from "@/lib/data-tools";
+import { useAuth } from "@/lib/auth-context";
 
 export const Route = createFileRoute("/_authenticated/audit")({
   head: () => ({ meta: [{ title: "Audit log — TransitOps" }] }),
@@ -39,6 +40,15 @@ function summarize(action: string, oldData: any, newData: any) {
 }
 
 function Audit() {
+  const { isAdmin } = useAuth();
+  if (!isAdmin) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center text-muted-foreground text-sm">
+        Access Denied. Only system administrators can view the audit log.
+      </div>
+    );
+  }
+
   const { data = [], isLoading } = useQuery({
     queryKey: ["audit_logs"],
     queryFn: async () => {

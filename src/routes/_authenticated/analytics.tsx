@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Panel, SectionHeader, StatCard } from "@/components/ui-bits";
 import { useVehicles, useDrivers, useTrips, useFuelLogs, useMaintenance } from "@/lib/data-hooks";
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { useAuth } from "@/lib/auth-context";
 
 export const Route = createFileRoute("/_authenticated/analytics")({
   head: () => ({ meta: [{ title: "Analytics — TransitOps" }] }),
@@ -11,6 +12,15 @@ export const Route = createFileRoute("/_authenticated/analytics")({
 const COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"];
 
 function Analytics() {
+  const { isDriver } = useAuth();
+  if (isDriver) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center text-muted-foreground text-sm">
+        Access Denied. Drivers do not have access to Analytics.
+      </div>
+    );
+  }
+
   const V = useVehicles().data ?? [];
   const D = useDrivers().data ?? [];
   const T = useTrips().data ?? [];
