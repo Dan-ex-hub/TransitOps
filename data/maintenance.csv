@@ -1,0 +1,4 @@
+Vehicle,Description,Start,End,Cost,Status
+MH-04-CD-5678,"Scheduled 20,000 km service",2026-07-05,2026-07-08,18500,CLOSED
+TN-11-IJ-7890,"Scheduled 20,000 km service",2026-07-05,2026-07-08,18500,CLOSED
+KA-05-GH-3456,Brake system inspection & pad replacement,2026-07-18,,8200,ACTIVE

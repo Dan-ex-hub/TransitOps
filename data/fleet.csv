@@ -1,0 +1,9 @@
+Registration,Name,Model,Type,Region,Capacity (kg),Odometer,Cost,Status
+MH-01-AB-1234,Falcon 01,Tata Prima 4028.S,Heavy Truck,West,28000,124500,3800000,ON_TRIP
+MH-04-CD-5678,Falcon 02,Ashok Leyland 3520,Heavy Truck,West,35000,89230,4200000,AVAILABLE
+DL-08-EF-9012,Kestrel 01,Eicher Pro 6028,Medium Truck,North,18000,56100,2400000,ON_TRIP
+KA-05-GH-3456,Kestrel 02,BharatBenz 1617R,Medium Truck,South,16000,72400,2200000,IN_SHOP
+TN-11-IJ-7890,Sparrow 01,Tata Ace Gold,Light Truck,South,800,34200,650000,AVAILABLE
+GJ-01-KL-2345,Sparrow 02,Mahindra Bolero Pik-Up,Light Truck,West,1200,45900,780000,ON_TRIP
+HR-26-MN-6789,Cargo 01,Volvo FM 460,Heavy Truck,North,40000,156800,5200000,AVAILABLE
+MH-12-OP-4567,Cargo 02,Scania G410,Heavy Truck,West,40000,98700,5400000,RETIRED

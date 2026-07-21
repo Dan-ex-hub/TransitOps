@@ -1,0 +1,9 @@
+Source,Destination,From region,To region,Cargo (kg),Distance (km),Revenue,Status
+Mumbai,Pune,West,West,22000,148,58000,COMPLETED
+Delhi,Jaipur,North,North,15000,281,,DISPATCHED
+Bangalore,Chennai,South,South,12000,347,,DISPATCHED
+Mumbai,Ahmedabad,West,West,26000,524,148000,COMPLETED
+Chennai,Hyderabad,South,South,900,626,,DISPATCHED
+Pune,Nashik,West,West,18000,210,72000,COMPLETED
+Delhi,Chandigarh,North,North,30000,244,,DISPATCHED
+Bangalore,Mysuru,South,South,1000,145,,DRAFT

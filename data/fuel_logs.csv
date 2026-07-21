@@ -1,0 +1,22 @@
+Date,Vehicle,Liters,Cost,Anomaly,Reason
+2026-07-19,MH-01-AB-1234,120,11400,no,
+2026-07-18,MH-01-AB-1234,180,17100,yes,Efficiency below fleet baseline
+2026-07-17,MH-01-AB-1234,95,9025,no,
+2026-07-19,MH-04-CD-5678,120,11400,no,
+2026-07-18,MH-04-CD-5678,180,17100,yes,Efficiency below fleet baseline
+2026-07-17,MH-04-CD-5678,95,9025,no,
+2026-07-19,DL-08-EF-9012,120,11400,no,
+2026-07-18,DL-08-EF-9012,180,17100,yes,Efficiency below fleet baseline
+2026-07-17,DL-08-EF-9012,95,9025,no,
+2026-07-19,KA-05-GH-3456,120,11400,no,
+2026-07-18,KA-05-GH-3456,180,17100,yes,Efficiency below fleet baseline
+2026-07-17,KA-05-GH-3456,95,9025,no,
+2026-07-19,TN-11-IJ-7890,120,11400,no,
+2026-07-18,TN-11-IJ-7890,180,17100,yes,Efficiency below fleet baseline
+2026-07-17,TN-11-IJ-7890,95,9025,no,
+2026-07-19,GJ-01-KL-2345,120,11400,no,
+2026-07-18,GJ-01-KL-2345,180,17100,yes,Efficiency below fleet baseline
+2026-07-17,GJ-01-KL-2345,95,9025,no,
+2026-07-19,HR-26-MN-6789,120,11400,no,
+2026-07-18,HR-26-MN-6789,180,17100,yes,Efficiency below fleet baseline
+2026-07-17,HR-26-MN-6789,95,9025,no,

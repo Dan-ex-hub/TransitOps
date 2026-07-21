@@ -1,0 +1,17 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "audit_logs": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      ".indexOn": ["created_at", "table_name", "actor_id"]
+    },
+    "vehicles":         { ".indexOn": ["status", "region", "type"] },
+    "drivers":          { ".indexOn": ["status", "license_category"] },
+    "trips":            { ".indexOn": ["status", "vehicle_id", "driver_id"] },
+    "fuel_logs":        { ".indexOn": ["vehicle_id", "date", "anomaly_flag"] },
+    "maintenance_logs": { ".indexOn": ["vehicle_id", "status"] },
+    "user_profiles":    { ".indexOn": ["status", "email"] }
+  }
+}

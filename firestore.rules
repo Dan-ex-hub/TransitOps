@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      // Any authenticated user can read all profiles (needed for admin panel)
+      allow read: if request.auth != null;
+
+      // Any authenticated user can CREATE their own profile (signup + admin setup script)
+      allow create: if request.auth != null && request.auth.uid == uid;
+
+      // Users can update their own profile BUT cannot change their own roles or status
+      allow update: if request.auth != null
+        && request.auth.uid == uid
+        && !("roles"  in request.resource.data.diff(resource.data).affectedKeys())
+        && !("status" in request.resource.data.diff(resource.data).affectedKeys());
+
+      // Only admins can change roles, status, or delete any user document
+      allow update, delete: if request.auth != null
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles.hasAny(['admin']);
+    }
+  }
+}
